@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Página Hija</title>
+  </head>
+  <body>
+    <h1>Página Hija</h1>
+    <button id="btnQueTal">qué tal?</button>
+    <button id="btnTodoBien">Todo bien</button>
+    <button id="guardar">ya se puede guardar</button>
+
+    <script>
+      const parent = window.parent;
+
+      document.getElementById("guardar").addEventListener("click", function () {
+        const randomNumber = Math.random();
+
+        // Decidir el mensaje basado en el número aleatorio
+        const message = randomNumber < 0.5 ? "noGuardar" : "siGuardar";
+
+        // Enviar el mensaje al elemento padre
+        parent.postMessage(message, "*");
+      });
+
+      document
+        .getElementById("btnQueTal")
+        .addEventListener("click", function () {
+          console.log("Alert lanzado de ¿Qué tal?");
+          parent.postMessage("quetal", "*");
+        });
+
+      document
+        .getElementById("btnTodoBien")
+        .addEventListener("click", function () {
+          console.log("Alert lanzado de Todo bien");
+          parent.postMessage("Todo bien", "*");
+        });
+
+      window.addEventListener("message", function (event) {
+        debugger;
+        if (event.data === "volver") {
+          alert(
+            "Alert lanzado desde app, escucho del padre el mensaje: Volver"
+          );
+          const randomNumber = Math.random();
+
+          // Decidir el mensaje basado en el número aleatorio
+          const message = randomNumber < 0.5 ? "noVolve" : "siVolve";
+
+          // Enviar el mensaje al elemento padre
+          parent.postMessage(message, "*");
+
+          // parent.postMessage("noVolve", "*");
+        } else {
+          alert(
+            "Alert lanzado desde Iframe, escucho del padre el mensaje: ¿Cómo estás?"
+          );
+        }
+      });
+    </script>
+  </body>
+</html>
