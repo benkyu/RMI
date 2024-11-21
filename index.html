@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>P·gina Hija</title>
+    <title>P√°gina Hija</title>
   </head>
   <body>
-    <h1>P·gina Hija</h1>
-    <button id="btnQueTal">quÈ tal?</button>
+    <h1>P√°gina Hija</h1>
+    <button id="btnQueTal">qu√© tal?</button>
     <button id="btnTodoBien">Todo bien</button>
     <button id="guardar">ya se puede guardar</button>
 
@@ -15,7 +15,7 @@
       document.getElementById("guardar").addEventListener("click", function () {
         const randomNumber = Math.random();
 
-        // Decidir el mensaje basado en el n˙mero aleatorio
+        // Decidir el mensaje basado en el n√∫mero aleatorio
         const message = randomNumber < 0.5 ? "noGuardar" : "siGuardar";
 
         // Enviar el mensaje al elemento padre
@@ -25,7 +25,7 @@
       document
         .getElementById("btnQueTal")
         .addEventListener("click", function () {
-          console.log("Alert lanzado de øQuÈ tal?");
+          console.log("Alert lanzado de ¬øQu√© tal?");
           parent.postMessage("quetal", "*");
         });
 
@@ -44,7 +44,7 @@
           );
           const randomNumber = Math.random();
 
-          // Decidir el mensaje basado en el n˙mero aleatorio
+          // Decidir el mensaje basado en el n√∫mero aleatorio
           const message = randomNumber < 0.5 ? "noVolve" : "siVolve";
 
           // Enviar el mensaje al elemento padre
@@ -53,10 +53,27 @@
           // parent.postMessage("noVolve", "*");
         } else {
           alert(
-            "Alert lanzado desde Iframe, escucho del padre el mensaje: øCÛmo est·s?"
+            "Alert lanzado desde Iframe, escucho del padre el mensaje: ¬øC√≥mo est√°s?"
           );
         }
       });
     </script>
+    <h1>Acceder a la C√°mara</h1>
+  <video id="video" autoplay playsinline style="width: 100%; max-width: 600px;"></video>
+  <button id="start" style="margin-top: 10px;">Iniciar C√°mara</button>
+  <script>
+    const videoElement = document.getElementById('video');
+    const startButton = document.getElementById('start');
+
+    startButton.addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        videoElement.srcObject = stream;
+      } catch (error) {
+        console.error('Error al acceder a la c√°mara:', error);
+        alert('No se pudo acceder a la c√°mara. Verifica los permisos.');
+      }
+    });
+  </script>
   </body>
 </html>
